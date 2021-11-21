@@ -41,11 +41,14 @@ def addTool(it,tags,requirements):
 def addRecipe(result, ingredients):
   global recipesAdded
   global recipesTableAdded
+  global spoilerList
   recipesTableAdded = recipesTableAdded+[ingredients]
+  spoilerList = spoilerList+"\nMake "+result.replace("minecraft:","")+"."
   recipesAdded = recipesAdded+["recipes.addShaped(<"+result+">,["+ingredients+"]);\n",]
 directory_path = os.getcwd()
 recipesAdded = []
 items = []
+spoilerList = "PUT AN '&' SYMBOL BEFORE THE SHOWN NAME WHEN SEARCHING IN JEI!"
 ingredientsDefault = "[]"
 ingredients = []
 generatedIngredients = []
@@ -337,5 +340,7 @@ def Start():
       for entry in recipesAdded:
         temp = temp+entry
       f.write("//#Remove\nrecipes.removeAll();\n//#Add\n"+temp+"//File End")
+  with open(directory_path+'/spoiler.txt', 'w') as f:
+      f.write(spoilerList)
   print("DONE!")
 Start()
