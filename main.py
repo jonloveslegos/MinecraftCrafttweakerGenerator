@@ -234,24 +234,20 @@ def Start():
             else:
               chosen = "[<"+recentlyAdded+">"
               maxP = 0
-              for p in range(0,random.randrange(0,9)):
+              for p in range(0,random.randrange(0,4)):
                 if p > 0:
-                  if p == 2 or p == 5 or p == 8:
-                    chosen = chosen+",null]"
-                  elif p == 6:
-                    chosen = chosen+",[null"
-                  elif p == 7:
-                    chosen = chosen+",null"
-                  elif p == 3:
+                  if p == 2:
                     chosen = chosen+",[<"+generatedIngredients[random.randrange(0,len(generatedIngredients))]+">"
+                  elif p == 1 or p == 3:
+                    chosen = chosen+",<"+generatedIngredients[random.randrange(0,len(generatedIngredients))]+">]"
                   else:
                     chosen = chosen+",<"+generatedIngredients[random.randrange(0,len(generatedIngredients))]+">"
                 maxP = p
-              for p in range(maxP+1,9):
-                if p == 2 or p == 5 or p == 8:
-                    chosen = chosen+",null]"
-                elif p == 3 or p == 6:
+              for p in range(maxP+1,4):
+                if p == 2:
                     chosen = chosen+",[null"
+                elif p == 1 or p == 3:
+                    chosen = chosen+",null]"
                 else:
                     chosen = chosen+",null"
               chosen = chosen+""
@@ -302,24 +298,20 @@ def Start():
           else:
                 chosen = "[<"+recentlyAdded+">"
                 maxP = 0
-                for p in range(0,random.randrange(0,9)):
+                for p in range(0,random.randrange(0,4)):
                   if p > 0:
-                    if p == 2 or p == 5 or p == 8:
-                      chosen = chosen+",null]"
-                    elif p == 6:
-                      chosen = chosen+",[null"
-                    elif p == 7:
-                      chosen = chosen+",null"
-                    elif p == 3:
+                    if p == 2:
                       chosen = chosen+",[<"+generatedIngredients[random.randrange(0,len(generatedIngredients))]+">"
+                    elif p == 1 or p == 3:
+                      chosen = chosen+",<"+generatedIngredients[random.randrange(0,len(generatedIngredients))]+">]"
                     else:
                       chosen = chosen+",<"+generatedIngredients[random.randrange(0,len(generatedIngredients))]+">"
                   maxP = p
-                for p in range(maxP+1,9):
-                  if p == 2 or p == 5 or p == 8:
-                      chosen = chosen+",null]"
-                  elif p == 3 or p == 6:
+                for p in range(maxP+1,4):
+                  if p == 2:
                       chosen = chosen+",[null"
+                  elif p == 1 or p == 3:
+                      chosen = chosen+",null]"
                   else:
                       chosen = chosen+",null"
                 chosen = chosen+""
