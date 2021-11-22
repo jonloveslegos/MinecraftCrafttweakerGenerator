@@ -1,6 +1,7 @@
 import os
 import random
 import sys
+import shutil
 class Ingredient:
   name = ""
   tags = []
@@ -77,6 +78,18 @@ def Start():
   global recipesTableAdded
   recipesTableAdded = []
   recentlyAdded = ""
+  try:
+    seed = int(input("Enter seed (put 0 for a random seed):"))
+    if seed == 0:
+      random.seed()
+      seed = random.randrange(1,1000000000)
+      random.seed(seed)
+    else:
+      random.seed(seed)
+  except Exception:
+    print("PLEASE INPUT A NUMBER!")
+    Start()
+    return
   addIngredient("minecraft:log",True,[],["fuel"],0)
   addIngredient("minecraft:reeds",True,[],[],0)
   addIngredient("minecraft:sand",True,[],[],0)
@@ -242,7 +255,9 @@ def Start():
         if item.canFind == False:
           if len(generatedIngredients) > 0:
             if checkAllInList(possibleTags,["table"]):
-              chosen = "[<"+recentlyAdded+">"
+              chose = generatedIngredients[random.randrange(0,len(generatedIngredients))]
+              chosen = "[<"+chose.name+">"
+              diff += chose.difficulty
               maxP = 0
               for p in range(0,random.randrange(0,9)):
                 chose = generatedIngredients[random.randrange(0,len(generatedIngredients))]
@@ -275,7 +290,9 @@ def Start():
                   possibleTags = possibleTags+[tag,]
                 e = -1
             else:
-              chosen = "[<"+recentlyAdded+">"
+              chose = generatedIngredients[random.randrange(0,len(generatedIngredients))]
+              chosen = "[<"+chose.name+">"
+              diff += chose.difficulty
               maxP = 0
               for p in range(0,random.randrange(0,4)):
                 chose = generatedIngredients[random.randrange(0,len(generatedIngredients))]
@@ -318,7 +335,9 @@ def Start():
       if checkAllInList(possibleTags,item.requirements):
         if len(generatedIngredients) > 0:
           if checkAllInList(possibleTags,["table"]):
-                chosen = "[<"+recentlyAdded+">"
+                chose = generatedIngredients[random.randrange(0,len(generatedIngredients))]
+                chosen = "[<"+chose.name+">"
+                diff += chose.difficulty
                 maxP = 0
                 for p in range(0,random.randrange(0,9)):
                   chose = Ingredient("ERROR",False,[],[],1000)
@@ -360,7 +379,9 @@ def Start():
                     possibleTags = possibleTags+[tag,]
                   e = -1
           else:
-                chosen = "[<"+recentlyAdded+">"
+                chose = generatedIngredients[random.randrange(0,len(generatedIngredients))]
+                chosen = "[<"+chose.name+">"
+                diff += chose.difficulty
                 maxP = 0
                 for p in range(0,random.randrange(0,4)):
                   chose = Ingredient("ERROR",False,[],[],1000)
@@ -408,18 +429,29 @@ def Start():
   #print(possibleTags)
   #print("------------------------------")
   try: 
-    os.mkdir(directory_path+'/spoiler') 
-  except OSError as error: 
-    print("Spoilers folder found...")
+    os.mkdir(directory_path+'/oldgeneration') 
+  except OSError: 
+    print("Old generation folder found...")
   try: 
     os.mkdir(directory_path+'/scripts') 
-  except OSError as error: 
+  except OSError: 
     print("Scripts folder found...")
-  with open(directory_path+'/scripts/recipes.zs', 'w') as f:
+  for file in os.listdir(directory_path+'/scripts'):
+    shutil.move(directory_path+'/scripts/'+file, directory_path+'/oldgeneration/'+file)
+  with open(directory_path+'/scripts/recipes'+str(seed)+'.zs', 'w') as f:
       temp = ""
       for entry in recipesAdded:
         temp = temp+entry
       f.write("//#Remove\nrecipes.removeAll();\n//#Add\n"+temp+"//File End")
-  with open(directory_path+'/spoiler/spoiler.txt', 'w') as f:
+      print("Made recipes.zs file...")
+  try: 
+    os.mkdir(directory_path+'/spoiler') 
+  except OSError: 
+    print("Spoilers folder found...")
+  for file in os.listdir(directory_path+'/spoiler'):
+    shutil.move(directory_path+'/spoiler/'+file, directory_path+'/oldgeneration/'+file)
+  with open(directory_path+'/spoiler/spoiler'+str(seed)+'.txt', 'w') as f:
       f.write(spoilerList)
+      print("Made spoilers file...")
   print("DONE!")
+  input("Your seed is "+str(seed)+".\nEnter to close.")
