@@ -280,10 +280,10 @@ def Start():
               for p in range(0,random.randrange(0,4)):
                 chose = generatedIngredients[random.randrange(0,len(generatedIngredients))]
                 if p > 0:
-                  if p == 2 or p == 5 or p == 8:
+                  if p == 1 or p == 3:
                     chosen = chosen+",<"+chose.name+">]"
                     diff += chose.difficulty
-                  elif p == 3 or p == 6:
+                  elif p == 2:
                     chosen = chosen+",[<"+chose.name+">"
                     diff += chose.difficulty
                   else:
@@ -367,13 +367,13 @@ def Start():
                   if len(addItemToRecipe([],diff,item.difficulty)) > 0:
                     chose = addItemToRecipe([],diff,item.difficulty)[random.randrange(0,len(addItemToRecipe([],diff,item.difficulty)))]
                   if p > 0:
-                    if p == 2 or p == 5 or p == 8:
+                    if p == 1 or p == 3:
                       if chose.name == "ERROR":
                         chosen = chosen+",null]"
                       else:
                         chosen = chosen+",<"+chose.name+">]"
                         diff += chose.difficulty
-                    elif p == 3 or p == 6:
+                    elif p == 2:
                       if chose.name == "ERROR":
                         chosen = chosen+",[null"
                       else:
