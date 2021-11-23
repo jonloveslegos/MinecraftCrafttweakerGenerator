@@ -155,8 +155,10 @@ def Start():
   addTool("minecraft:chest",[],[],9)
   addTool("minecraft:cauldron",[],[],11)
   addTool("minecraft:bookshelf",[],[],9)
+  addTool("minecraft:shield",[],[],8)
   addTool("minecraft:stone_button",[],[],6)
   addTool("minecraft:torch",[],[],5)
+  addTool("minecraft:boat",[],[],7)
   addTool("minecraft:golden_rail",[],[],8)
   addTool("minecraft:rail",[],[],8)
   addTool("minecraft:minecart",[],[],6)
@@ -232,8 +234,29 @@ def Start():
   e = -1
   fails = 50
   possibleTags = []
+  initialInv = input("What class?(starting equipment)\narcher, swordsman, adventurer, miner, lumberjack, none.")
+  while initialInv != "archer" and initialInv != "swordsman" and initialInv != "adventurer" and initialInv != "miner" and initialInv != "lumberjack" and initialInv != "none":
+    initialInv = input("INPUT ANY OF THESE WITHOUT CAPS\nWhat class?(starting equipment)\narcher, swordsman, adventurer, miner, lumberjack, none.")
+  if initialInv == "swordsman":
+    initialInv = 'mods.initialinventory.InvHandler.addStartingItem(<item:minecraft:wooden_sword>);'
+    addRecipe("minecraft:wooden_sword","[null, <minecraft:log>], [null, null]")
+  elif initialInv == "adventurer":
+    initialInv = 'mods.initialinventory.InvHandler.addStartingItem(<item:minecraft:boat>);'
+    addRecipe("minecraft:boat","[null, <minecraft:log>], [null, null]")
+  elif initialInv == "archer":
+    initialInv = 'mods.initialinventory.InvHandler.addStartingItem(<item:minecraft:bow>);\nmods.initialinventory.InvHandler.addStartingItem(<item:minecraft:arrow> * 16);'
+    addRecipe("minecraft:bow","[null, <minecraft:log>], [null, null]")
+    addRecipe("minecraft:arrow","[null, null], [<minecraft:log>, null]")
+  elif initialInv == "miner":
+    initialInv = 'mods.initialinventory.InvHandler.addStartingItem(<item:minecraft:wooden_pickaxe>);'
+    addRecipe("minecraft:wooden_pickaxe","[null, <minecraft:log>], [null, null]")
+  elif initialInv == "lumberjack":
+    initialInv = 'mods.initialinventory.InvHandler.addStartingItem(<item:minecraft:wooden_axe>);'
+    addRecipe("minecraft:wooden_axe","[null, <minecraft:log>], [null, null]")
   addRecipe("minecraft:log","[<minecraft:log:*>, null], [null, null]")
   addRecipe("minecraft:wool","[<minecraft:wool:*>, null], [null, null]")
+  addRecipe("minecraft:log","[<minecraft:log>, null], [null, null]")
+  addRecipe("minecraft:wool","[<minecraft:wool>, null], [null, null]")
   addRecipe("naturescompass:naturescompass","[<minecraft:dirt>, null], [null, null]")
   print("Working...")
   while (len(combList) > 0):
@@ -443,7 +466,7 @@ def Start():
       temp = ""
       for entry in recipesAdded:
         temp = temp+entry
-      f.write("//#Remove\nrecipes.removeAll();\n//#Add\n"+temp+"//File End")
+      f.write("//#Remove\nrecipes.removeAll();\n//#Inv\n"+initialInv+"\n//#Add\n"+temp+"//File End")
       print("Made recipes.zs file...")
   try: 
     os.mkdir(directory_path+'/spoiler') 
