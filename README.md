@@ -1,6 +1,8 @@
 # MinecraftCrafttweakerGenerator
 DOWNLOAD THE RELEASES IF YOU WANT TO PLAY THIS! NOT THE SOURCE CODE!
 
+THIS MOD REQUIRES NATURES COMPASS AND CRAFT TWEAKER! THE RELEASES COME WITH THOSE MODS ALREADY.
+
 Steps to install:
 1. download the latest release .zip
 2. Unzip it into the '%AppData%\\.minecraft' folder causing a new folder to appear.

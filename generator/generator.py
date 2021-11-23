@@ -234,6 +234,7 @@ def Start():
   possibleTags = []
   addRecipe("minecraft:log","[<minecraft:log:*>, null], [null, null]")
   addRecipe("minecraft:wool","[<minecraft:wool:*>, null], [null, null]")
+  addRecipe("naturescompass:naturescompass","[<minecraft:dirt>, null], [null, null]")
   print("Working...")
   while (len(combList) > 0):
     e += 1
