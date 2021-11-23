@@ -253,6 +253,8 @@ def Start():
   elif initialInv == "lumberjack":
     initialInv = 'mods.initialinventory.InvHandler.addStartingItem(<item:minecraft:wooden_axe>);'
     addRecipe("minecraft:wooden_axe","[null, <minecraft:log>], [null, null]")
+  elif initialInv == "none":
+    initialInv = ""
   addRecipe("minecraft:log","[<minecraft:log:*>, null], [null, null]")
   addRecipe("minecraft:wool","[<minecraft:wool:*>, null], [null, null]")
   addRecipe("minecraft:log","[<minecraft:log>, null], [null, null]")
